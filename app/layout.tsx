@@ -9,6 +9,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'My Portfolio',
   description: 'Personal portfolio website showcasing my projects and skills',
+  metadataBase: new URL('https://nikisharomain.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function RootLayout({
