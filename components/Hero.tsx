@@ -55,7 +55,7 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="blinking-dot"></span>
-          Hi, I'm Nikisha Romain — Web Developer & Digital Strategist
+          Hi, I&apos;m Nikisha Romain — Web Developer & Digital Strategist
         </div>
         <h1 className="hero-title">
         Caribbean creativity, global digital strategy.

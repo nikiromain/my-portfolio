@@ -4,7 +4,7 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <h2 className="section-title">Let's Build Together</h2>
+        <h2 className="section-title">Let&apos;s Build Together</h2>
         <a href="#contact" className="contact-button">
           Contact
         </a>

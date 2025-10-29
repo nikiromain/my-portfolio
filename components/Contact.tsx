@@ -29,12 +29,12 @@ const Contact = () => {
     <section id="contact" className="contact-section">
       <div className="marquee-container">
         <div className="marquee">
-          <span>Let's Connect</span>
-          <span>Let's Connect</span>
-          <span>Let's Connect</span>
-          <span>Let's Connect</span>
-          <span>Let's Connect</span>
-          <span>Let's Connect</span>
+          <span>Let&apos;s Connect</span>
+          <span>Let&apos;s Connect</span>
+          <span>Let&apos;s Connect</span>
+          <span>Let&apos;s Connect</span>
+          <span>Let&apos;s Connect</span>
+          <span>Let&apos;s Connect</span>
         </div>
       </div>
       <div className="contact-wrapper">
@@ -43,10 +43,10 @@ const Contact = () => {
             <div className="contact-info">
               <div className="contact-badge">
                 <span className="blinking-dot"></span>
-                Let's work together
+                Let&apos;s work together
               </div>
               <p>
-                I'm always open to discussing new projects, creative ideas, or
+                I&apos;m always open to discussing new projects, creative ideas, or
                 opportunities to be part of your visions. Feel free to reach out!
               </p>
               <hr className="contact-divider" />
