@@ -33,7 +33,7 @@ const Hero = () => {
           }
         }}
       >
-        <source src={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/hero_video.mp4"} type="video/mp4" />
+        <source src="/hero_video.mp4" type="video/mp4" />
       </video>
       <div className="hero-overlay"></div>
       
