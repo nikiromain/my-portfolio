@@ -129,7 +129,7 @@ const Contact = () => {
           width: 100%;
           overflow: hidden;
           background: var(--bg-color);
-          padding: 4rem 0;
+          padding: 1rem 0 4rem 0;
           margin: 0;
         }
 
@@ -436,6 +436,11 @@ const Contact = () => {
           .contact-info p {
             font-size: 28px;
           }
+        }
+
+        :global(:root.light) .marquee span {
+          color: var(--text-primary);
+          opacity: 0.9;
         }
       `}</style>
     </section>

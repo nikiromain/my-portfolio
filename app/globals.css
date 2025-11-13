@@ -70,6 +70,10 @@ body {
   mix-blend-mode: difference;
 }
 
+:root.light .custom-cursor {
+  border: 2px solid rgba(10, 10, 10, 0.8);
+}
+
 .custom-cursor::after {
   content: '';
   position: absolute;
@@ -80,6 +84,10 @@ body {
   background: white;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+}
+
+:root.light .custom-cursor::after {
+  background: #0a0a0a;
 }
 
 .custom-cursor.hover {

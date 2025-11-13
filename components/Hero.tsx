@@ -1,9 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0)
+
+  const handleSmoothScroll = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    event.preventDefault()
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -25,7 +33,7 @@ const Hero = () => {
           }
         }}
       >
-        <source src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4" type="video/mp4" />
+        <source src="/hero_video.mp4" type="video/mp4" />
       </video>
       <div className="hero-overlay"></div>
       
@@ -55,20 +63,28 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="blinking-dot"></span>
-          Hi, I&apos;m Nikisha Romain — Web Developer & Digital Strategist
+          Hi, I&apos;m Nikisha Romain — Web Developer • Digital Strategist • Web Project Lead
         </div>
         <h1 className="hero-title">
         Caribbean creativity, global digital strategy.
         </h1>
     
         <p className="hero-description">
-        Innovative web solutions for brands that dare to lead.
+        Innovative web solutions for brands that dare to lead. Empowering Caribbean and global brands to grow, connect, and thrive online.
         </p>
         <div className="hero-buttons">
-          <a href="#projects" className="btn btn-primary">
+          <a 
+            href="#projects-hero" 
+            className="btn btn-primary"
+            onClick={(event) => handleSmoothScroll(event, 'projects-hero')}
+          >
             View My Work
           </a>
-          <a href="#contact" className="btn btn-secondary">
+          <a 
+            href="#contact" 
+            className="btn btn-secondary"
+            onClick={(event) => handleSmoothScroll(event, 'contact')}
+          >
             Get In Touch
           </a>
         </div>
@@ -84,7 +100,7 @@ const Hero = () => {
       <style jsx>{`
         .hero {
           position: relative;
-          min-height: 100vh;
+          min-height: 90vh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -93,6 +109,7 @@ const Hero = () => {
           border: 1px solid rgba(255, 255, 255, 0);
           border-radius: 30px;
           margin: 2rem;
+          padding-top: 6rem;
         }
 
         .hero-video {
@@ -136,16 +153,44 @@ const Hero = () => {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.85rem, 1.5vw, 1rem);
           color: rgb(255, 255, 255);
-          background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          background: linear-gradient(90deg, rgba(50, 50, 50, 0.4) 0%, rgba(30, 30, 30, 0.4) 10%, rgba(20, 20, 20, 0.6) 50%, rgba(0, 0, 0, 0.75) 100%);
           border-radius: 50px;
+          position: relative;
           transition: all 0.3s ease;
           animation: fadeInUp 0.8s ease-out;
         }
 
+        .hero-badge::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 50px;
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 100%);
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        .hero-badge::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 50px;
+          background: linear-gradient(90deg, rgba(50, 50, 50, 0.4) 0%, rgba(30, 30, 30, 0.4) 10%, rgba(20, 20, 20, 0.6) 50%, rgba(0, 0, 0, 0.75) 100%);
+          z-index: -1;
+          pointer-events: none;
+        }
+
         .hero-badge:hover {
-          border-color: rgba(255, 255, 255, 0.6);
+          background: linear-gradient(90deg, rgba(70, 70, 70, 0.5) 0%, rgba(40, 40, 40, 0.5) 10%, rgba(30, 30, 30, 0.7) 50%, rgba(0, 0, 0, 0.8) 100%);
           transform: translateY(-2px);
+        }
+
+        .hero-badge:hover::before {
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .hero-badge:hover::after {
+          background: linear-gradient(90deg, rgba(70, 70, 70, 0.5) 0%, rgba(40, 40, 40, 0.5) 10%, rgba(30, 30, 30, 0.7) 50%, rgba(0, 0, 0, 0.8) 100%);
         }
 
         .blinking-dot {
@@ -426,8 +471,10 @@ const Hero = () => {
 
         @media (max-width: 768px) {
           .hero {
-            margin: 1rem;
+            margin: 0.5rem;
             border-radius: 20px;
+            padding-top: 4rem;
+            min-height: 85vh;
           }
 
           .hero-content {
@@ -496,6 +543,80 @@ const Hero = () => {
           .hero-badge {
             font-size: 0.9rem;
           }
+        }
+
+        :global(:root.light) .hero {
+          background: #f5f5f5;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .hero-overlay {
+          background: rgba(255, 255, 255, 0.4);
+        }
+
+        :global(:root.light) .hero-video {
+          filter: grayscale(50%) brightness(0.7);
+        }
+
+        :global(:root.light) .hero-badge {
+          color: rgb(10, 10, 10);
+          background: linear-gradient(90deg, rgba(240, 240, 240, 0.8) 0%, rgba(220, 220, 220, 0.8) 10%, rgba(200, 200, 200, 0.9) 50%, rgba(180, 180, 180, 0.95) 100%);
+        }
+
+        :global(:root.light) .hero-badge::before {
+          background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 55%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        :global(:root.light) .hero-badge::after {
+          background: linear-gradient(90deg, rgba(240, 240, 240, 0.8) 0%, rgba(220, 220, 220, 0.8) 10%, rgba(200, 200, 200, 0.9) 50%, rgba(180, 180, 180, 0.95) 100%);
+        }
+
+        :global(:root.light) .hero-badge:hover {
+          background: linear-gradient(90deg, rgba(250, 250, 250, 0.9) 0%, rgba(230, 230, 230, 0.9) 10%, rgba(210, 210, 210, 1) 50%, rgba(190, 190, 190, 1) 100%);
+        }
+
+        :global(:root.light) .hero-title {
+          color: rgb(10, 10, 10);
+        }
+
+        :global(:root.light) .hero-description {
+          color: rgba(10, 10, 10, 0.7);
+        }
+
+        :global(:root.light) .btn {
+          color: rgba(10, 10, 10, 0.7);
+        }
+
+        :global(:root.light) .btn-primary {
+          border: 1px solid rgba(10, 10, 10, 0.3);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .btn-primary:hover {
+          border-color: rgba(10, 10, 10, 0.6);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        :global(:root.light) .btn-secondary {
+          border: 1px solid rgba(10, 10, 10, 0.3);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .btn-secondary:hover {
+          border-color: rgba(10, 10, 10, 0.6);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        :global(:root.light) .scroll-indicator {
+          color: rgba(10, 10, 10, 0.8);
+        }
+
+        :global(:root.light) .mouse {
+          border: 2px solid rgba(10, 10, 10, 0.8);
+        }
+
+        :global(:root.light) .mouse-wheel {
+          background: rgba(10, 10, 10, 0.8);
         }
       `}</style>
     </section>

@@ -299,6 +299,44 @@ const ProjectsHero = () => {
             grid-template-columns: repeat(2, 1fr);
           }
         }
+
+        :global(:root.light) .projects-hero-section {
+          background: var(--bg-color);
+        }
+
+        :global(:root.light) .projects-badge {
+          color: rgb(10, 10, 10);
+          border: 1px solid rgba(10, 10, 10, 0.2);
+        }
+
+        :global(:root.light) .projects-badge:hover {
+          border-color: rgba(10, 10, 10, 0.4);
+        }
+
+        :global(:root.light) .projects-hero-title {
+          color: rgb(10, 10, 10);
+        }
+
+        :global(:root.light) .project-card {
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          filter: grayscale(50%) brightness(0.9);
+        }
+
+        :global(:root.light) .project-card:hover {
+          filter: grayscale(0%) brightness(1);
+        }
+
+        :global(:root.light) .project-overlay {
+          background: rgba(255, 255, 255, 0.85);
+        }
+
+        :global(:root.light) .project-title {
+          color: rgb(10, 10, 10);
+        }
+
+        :global(:root.light) .project-description {
+          color: rgba(10, 10, 10, 0.7);
+        }
       `}</style>
     </section>
   )

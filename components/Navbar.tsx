@@ -32,21 +32,28 @@ const Navbar = () => {
           <div className="nav-logo-wrapper" onClick={() => scrollToSection('hero')}>
             <Logo />
           </div>
-          <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
-            <a href="#about" onClick={() => scrollToSection('about')} className="nav-link">
-              About
-            </a>
-            <a href="#skills" onClick={() => scrollToSection('skills')} className="nav-link">
-              Skills
-            </a>
-            <a href="#projects" onClick={() => scrollToSection('projects')} className="nav-link">
-              Projects
-            </a>
-            <a href="#contact" onClick={() => scrollToSection('contact')} className="nav-link">
-              Contact <span className="arrow">→</span>
-            </a>
-          </div>
           <div className="nav-actions">
+            <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
+              <a href="#hero" onClick={() => scrollToSection('hero')} className="nav-link">
+                Home
+              </a>
+              <a href="#projects-hero" onClick={() => scrollToSection('projects-hero')} className="nav-link">
+                Projects
+              </a>
+              <a href="#about" onClick={() => scrollToSection('about')} className="nav-link">
+                About
+              </a>
+              <a href="#skills" onClick={() => scrollToSection('skills')} className="nav-link">
+                Skills
+              </a>
+            </div>
+            <a 
+              href="#contact" 
+              onClick={() => scrollToSection('contact')} 
+              className="cta-button"
+            >
+              Let&apos;s work <span className="cta-arrow">→</span>
+            </a>
             <button 
               className="theme-toggle"
               onClick={toggleTheme}
@@ -82,7 +89,7 @@ const Navbar = () => {
           left: 0;
           right: 0;
           z-index: 1000;
-          padding: 2rem 0 1rem;
+          padding: 2rem 0 0.5rem;
           transition: all 0.3s ease;
           background: transparent;
         }
@@ -93,21 +100,15 @@ const Navbar = () => {
         }
 
         .nav-container {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 32px;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-top: 1rem;
-          margin-bottom: 1rem;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
           background: transparent;
-        }
-
-        .nav-actions {
-          display: flex;
-          gap: 1rem;
-          align-items: center;
         }
 
         .theme-toggle {
@@ -184,6 +185,37 @@ const Navbar = () => {
           transform: translateX(5px);
         }
 
+        .cta-button {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.4rem 1rem;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          color: var(--text-primary);
+          text-decoration: none;
+          font-family: 'Inter', sans-serif;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.05);
+          margin-right: 0.5rem;
+        }
+
+        .cta-button:hover {
+          border-color: rgba(255, 255, 255, 0.5);
+          background: rgba(255, 255, 255, 0.12);
+          transform: translateY(-2px);
+        }
+
+        .cta-arrow {
+          transition: transform 0.3s ease;
+          display: inline-block;
+        }
+
+        .cta-button:hover .cta-arrow {
+          transform: translateX(4px);
+        }
+
         .hamburger {
           display: none;
           flex-direction: column;
@@ -215,20 +247,34 @@ const Navbar = () => {
         }
 
         @media (max-width: 768px) {
+          .navbar {
+            padding: 1.5rem 0 0.5rem;
+          }
+
+          .nav-container {
+            padding: 0 1rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+          }
+
+          .nav-actions {
+            gap: 0.5rem;
+          }
+
           .hamburger {
             display: flex;
           }
 
           .nav-menu {
             position: fixed;
-            top: 70px;
+            top: 60px;
             right: -100%;
             width: 100%;
-            height: calc(100vh - 70px);
+            height: calc(100vh - 60px);
             background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(20px);
             flex-direction: column;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             gap: 1.5rem;
             transition: right 0.3s ease;
             border-top: 1px solid var(--border-color);
@@ -240,7 +286,70 @@ const Navbar = () => {
 
           .nav-link {
             font-size: 1.2rem;
+            padding: 0.5rem 0;
           }
+
+          .cta-button {
+            display: none;
+          }
+
+          .theme-toggle {
+            padding: 6px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .navbar {
+            padding: 1rem 0 0.5rem;
+          }
+
+          .nav-container {
+            padding: 0 0.75rem;
+          }
+
+          .nav-menu {
+            padding: 1.5rem 1rem;
+            gap: 1.25rem;
+          }
+
+          .nav-link {
+            font-size: 1.1rem;
+          }
+        }
+
+        .nav-actions {
+          display: flex;
+          gap: 1.5rem;
+          align-items: center;
+        }
+
+        :global(:root.light) .navbar {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px) saturate(180%);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .navbar.scrolled {
+          background: rgba(255, 255, 255, 0.98);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        :global(:root.light) .theme-toggle:hover {
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        :global(:root.light) .cta-button {
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          color: var(--text-primary);
+        }
+
+        :global(:root.light) .cta-button:hover {
+          background: rgba(0, 0, 0, 0.05);
+          border-color: rgba(0, 0, 0, 0.3);
+        }
+
+        :global(:root.light) .nav-menu {
+          background: rgba(255, 255, 255, 0.98);
         }
       `}</style>
     </>

@@ -1,18 +1,20 @@
 'use client'
 
 const About = () => {
-  // Generate random positions for particles
-  const generateParticles = () => {
-    return [...Array(50)].map((_, i) => ({
+  // Generate floating gradient orbs
+  const generateOrbs = () => {
+    return [...Array(20)].map((_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
-      delay: Math.random() * 2,
-      duration: 5 + Math.random() * 5,
+      delay: Math.random() * 4,
+      duration: 10 + Math.random() * 10,
+      size: 60 + Math.random() * 120,
+      blur: 30 + Math.random() * 40,
     }))
   }
 
-  const particles = generateParticles()
+  const orbs = generateOrbs()
 
   return (
     <section id="about" className="about-section">
@@ -26,27 +28,37 @@ const About = () => {
               </div>
               <h3 className="subsection-title">Meet Nikisha</h3>
               <p className="about-text">
-                Digital strategist and web designer and developer with over six years of experience. Team lead and change management.
+                I'm Nikisha Romain, a Digital Strategist, Web Designer, and Developer with over six years of experience helping businesses build their online presence. I've worked with more than 200 clients across the Caribbean, creating impactful websites across various industries. As a Team Lead skilled in change management, I focus on delivering innovative, results-driven digital solutions that help brands grow and stand out online.
               </p>
               <hr className="title-divider" />
               <div className="skills-list">
+                <span className="skill-btn">Client Relationship Management</span>
+                <span className="skill-btn">SEO & Web Optimization</span>
+                <span className="skill-btn">Digital Marketing Strategy</span>
+                <span className="skill-btn">Project Management & Team Leadership</span>
+                <span className="skill-btn">UI/UX & QA Testing</span>
+                <span className="skill-btn">HubSpot</span>
+                <span className="skill-btn">Zoho</span>
+                <span className="skill-btn">Jira</span>
+                <span className="skill-btn">WordPress</span>
+                <span className="skill-btn">Google Analytics</span>
                 <span className="skill-btn">HTML</span>
                 <span className="skill-btn">CSS</span>
-                <span className="skill-btn">Web Designer</span>
-                <span className="skill-btn">CRM</span>
+                <span className="skill-btn">CRM & CMS Platforms</span>
+                <span className="skill-btn">Social Media Marketing</span>
               </div>
               <hr className="title-divider" />
               <div className="about-stats">
                 <div className="stat">
-                  <h3>50+</h3>
+                  <h3>250+</h3>
                   <p>Projects</p>
                 </div>
                 <div className="stat">
-                  <h3>5+</h3>
+                  <h3>6+</h3>
                   <p>Years</p>
                 </div>
                 <div className="stat">
-                  <h3>100+</h3>
+                  <h3>300+</h3>
                   <p>Clients</p>
                 </div>
               </div>
@@ -54,24 +66,30 @@ const About = () => {
             <div className="about-right">
               <div className="video-wrapper">
                 <div className="particles-background">
-                  {particles.map((particle) => (
+                  {orbs.map((orb) => (
                     <div 
-                      key={particle.id} 
-                      className="particle"
+                      key={orb.id} 
+                      className="floating-orb"
                       style={{
-                        left: `${particle.left}%`,
-                        top: `${particle.top}%`,
-                        animationDelay: `${particle.delay}s`,
-                        animationDuration: `${particle.duration}s`
+                        left: `${orb.left}%`,
+                        top: `${orb.top}%`,
+                        animationDelay: `${orb.delay}s`,
+                        animationDuration: `${orb.duration}s`,
+                        width: `${orb.size}px`,
+                        height: `${orb.size}px`,
+                        filter: `blur(${orb.blur}px)`
                       }}
                     ></div>
                   ))}
                 </div>
                 <div className="profile-image-wrapper">
                   <img 
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80"
-                    alt="Profile"
+                    src="/profile.jpeg"
+                    alt="Nikisha Romain"
                     className="profile-image"
+                    onError={(e) => {
+                      e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkFkZCBQcm9maWxlIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
+                    }}
                   />
                 </div>
               </div>
@@ -142,7 +160,7 @@ const About = () => {
 
         .about-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1.3fr 0.7fr;
           gap: 5rem;
           align-items: stretch;
         }
@@ -166,35 +184,36 @@ const About = () => {
           overflow: hidden;
         }
 
-        .particle {
+        .floating-orb {
           position: absolute;
-          width: 3px;
-          height: 3px;
-          background: rgba(255, 255, 255, 0.8);
           border-radius: 50%;
-          animation: float infinite ease-in-out;
-          box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0.05) 70%, transparent 100%);
+          box-shadow: 0 0 40px rgba(255, 255, 255, 0.3), 0 0 80px rgba(255, 255, 255, 0.15);
+          animation: floatOrb infinite ease-in-out;
           will-change: transform, opacity;
+          pointer-events: none;
         }
 
-        @keyframes float {
+        @keyframes floatOrb {
           0% {
-            transform: translate(0, 0) scale(0);
-            opacity: 0;
+            transform: translate(0, 0) scale(0.7);
+            opacity: 0.4;
           }
-          10% {
-            opacity: 1;
+          25% {
+            transform: translate(50px, -60px) scale(1.0);
+            opacity: 0.7;
           }
           50% {
-            transform: translate(30px, -30px) scale(1);
-            opacity: 1;
+            transform: translate(100px, -120px) scale(1.3);
+            opacity: 0.8;
           }
-          90% {
-            opacity: 1;
+          75% {
+            transform: translate(150px, -100px) scale(1.1);
+            opacity: 0.7;
           }
           100% {
-            transform: translate(60px, -60px) scale(1);
-            opacity: 0;
+            transform: translate(200px, -180px) scale(0.7);
+            opacity: 0.4;
           }
         }
 
@@ -215,6 +234,12 @@ const About = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          filter: grayscale(100%);
+          transition: filter 0.3s ease;
+        }
+
+        .profile-image-wrapper:hover .profile-image {
+          filter: grayscale(70%);
         }
 
         .subsection-title {
@@ -251,7 +276,7 @@ const About = () => {
         .skill-btn {
           display: inline-block;
           padding: 0.5rem 1rem;
-          background: var(--bg-color);
+          background: rgba(255, 255, 255, 0.15);
           border: none;
           border-radius: 8px;
           color: var(--text-secondary);
@@ -264,19 +289,19 @@ const About = () => {
         .skill-btn:hover {
           color: var(--text-primary);
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.25);
         }
 
         .about-stats {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-          gap: 2rem;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 1.5rem;
           margin-top: 3rem;
         }
 
         .stat {
           text-align: center;
-          padding: 2rem;
+          padding: 1.25rem 1.5rem;
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -293,7 +318,7 @@ const About = () => {
         }
 
         .stat h3 {
-          font-size: 2.5rem;
+          font-size: 2rem;
           font-weight: 700;
           background: linear-gradient(135deg, #ffffff, #e0e0e0);
           -webkit-background-clip: text;
@@ -335,11 +360,11 @@ const About = () => {
           }
 
           .stat {
-            padding: 1.5rem 1rem;
+            padding: 1rem 0.75rem;
           }
 
           .stat h3 {
-            font-size: 2rem;
+            font-size: 1.75rem;
           }
 
           .video-wrapper {
@@ -352,16 +377,25 @@ const About = () => {
         }
 
         @media (max-width: 480px) {
+          .about-section {
+            padding: 1.5rem 0;
+          }
+
           .subsection-title {
             font-size: 1.75rem;
           }
 
           .about-stats {
             grid-template-columns: 1fr;
+            gap: 0.75rem;
+          }
+
+          .stat {
+            padding: 0.75rem 0.5rem;
           }
 
           .stat h3 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
           }
 
           .skills-list {
@@ -382,6 +416,68 @@ const About = () => {
           .subsection-title {
             font-size: 2.5rem;
           }
+        }
+
+        :global(:root.light) .about-section {
+          background: rgba(245, 245, 245, 0.8);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .about-badge {
+          color: rgb(10, 10, 10);
+          border: 1px solid rgba(10, 10, 10, 0.2);
+        }
+
+        :global(:root.light) .about-badge:hover {
+          border-color: rgba(10, 10, 10, 0.4);
+        }
+
+        :global(:root.light) .particles-background {
+          background: #f0f0f0;
+        }
+
+        :global(:root.light) .floating-orb {
+          background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.1) 40%, rgba(99, 102, 241, 0.05) 70%, transparent 100%);
+          box-shadow: 0 0 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(99, 102, 241, 0.1);
+        }
+
+        :global(:root.light) .profile-image-wrapper {
+          border: 3px solid rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        :global(:root.light) .title-divider {
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        :global(:root.light) .stat {
+          background: rgba(255, 255, 255, 0.6);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .stat:hover {
+          background: rgba(255, 255, 255, 0.8);
+          box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        :global(:root.light) .stat h3 {
+          background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        :global(:root.light) .skill-btn {
+          background: rgba(255, 255, 255, 0.6);
+          color: var(--text-primary);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .skill-btn:hover {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: rgba(99, 102, 241, 0.3);
         }
       `}</style>
     </section>

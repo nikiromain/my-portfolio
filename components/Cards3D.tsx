@@ -19,7 +19,7 @@ const Cards3D = () => {
   return (
     <section id="cards-3d" className="cards-3d-section">
       <div className="cards-3d-container">
-        <div className="cards-scroll-wrapper">
+        <div className="carousel-wrapper">
           <div className="cards-scroll-inner">
             {cards.map((card, idx) => (
               <div key={idx} className="card-item">
@@ -42,7 +42,7 @@ const Cards3D = () => {
       </div>
       <style jsx>{`
         .cards-3d-section {
-          padding: 0;
+          padding: 4rem 0 1rem 0;
           margin-top: -6rem;
           background: var(--bg-color);
           overflow: hidden;
@@ -50,20 +50,16 @@ const Cards3D = () => {
 
         .cards-3d-container {
           width: 100%;
-          perspective: 1500px;
-          perspective-origin: center center;
-          min-height: 500px;
+          min-height: 450px;
           display: flex;
           align-items: center;
           justify-content: center;
+          position: relative;
         }
 
-        .cards-scroll-wrapper {
+        .carousel-wrapper {
           width: 100%;
           overflow: hidden;
-          transform-style: preserve-3d;
-          transform: rotateY(-15deg);
-          animation: turn3d 10s linear infinite;
         }
 
         .cards-scroll-inner {
@@ -71,7 +67,6 @@ const Cards3D = () => {
           gap: 2rem;
           animation: scroll 30s linear infinite;
           width: max-content;
-          transform-style: preserve-3d;
         }
 
         .card-item {
@@ -89,49 +84,43 @@ const Cards3D = () => {
           }
         }
 
-        @keyframes turn3d {
-          0%, 100% {
-            transform: rotateY(-15deg) rotateX(0deg);
-          }
-          25% {
-            transform: rotateY(15deg) rotateX(2deg);
-          }
-          50% {
-            transform: rotateY(-15deg) rotateX(0deg);
-          }
-          75% {
-            transform: rotateY(15deg) rotateX(-2deg);
-          }
+        .card-item:hover {
+          filter: brightness(1.1);
         }
 
         .card-content {
           width: 100%;
           height: 100%;
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.08);
           backdrop-filter: blur(20px) saturate(180%);
           border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 30px;
-          padding: 2rem;
+          border-radius: 20px;
+          padding: 2.5rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          transition: transform 0.3s ease;
+          transition: all 0.3s ease;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .card-item:hover .card-content {
-          transform: translateY(-10px);
-          border-color: rgba(255, 255, 255, 0.4);
+          border-color: rgba(255, 255, 255, 0.35);
+          background: rgba(255, 255, 255, 0.12);
+          box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
         }
 
         .card-content h3 {
           font-family: 'Satoshi', sans-serif;
           font-size: 2rem;
-          color: white;
+          font-weight: 500;
+          color: #ffffff;
           margin-bottom: 1rem;
+          line-height: 1.2;
         }
 
         .card-content p {
           font-family: 'Inter', sans-serif;
+          font-size: 1rem;
           color: rgba(255, 255, 255, 0.7);
           line-height: 1.6;
         }
@@ -142,7 +131,7 @@ const Cards3D = () => {
           }
 
           .card-item {
-            min-width: 300px;
+            min-width: 280px;
             height: 350px;
           }
 
@@ -150,9 +139,60 @@ const Cards3D = () => {
             gap: 1.5rem;
           }
 
-          .cards-3d-container {
-            perspective: 1000px;
+          .card-content {
+            padding: 2rem;
           }
+
+          .card-content h3 {
+            font-size: 1.75rem;
+          }
+
+          .card-content p {
+            font-size: 0.9rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cards-3d-container {
+            min-height: 350px;
+          }
+
+          .card-item {
+            min-width: 250px;
+            height: 320px;
+          }
+
+          .card-content {
+            padding: 1.5rem;
+          }
+
+          .card-content h3 {
+            font-size: 1.5rem;
+          }
+
+          .card-content p {
+            font-size: 0.85rem;
+          }
+        }
+
+        :global(:root.light) .card-content {
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        :global(:root.light) .card-item:hover .card-content {
+          border-color: rgba(99, 102, 241, 0.3);
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 15px 50px rgba(99, 102, 241, 0.15);
+        }
+
+        :global(:root.light) .card-content h3 {
+          color: #0a0a0a;
+        }
+
+        :global(:root.light) .card-content p {
+          color: rgba(10, 10, 10, 0.7);
         }
       `}</style>
     </section>

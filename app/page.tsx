@@ -4,7 +4,6 @@ import ProjectsHero from '@/components/ProjectsHero'
 import About from '@/components/About'
 import VideoExpand from '@/components/VideoExpand'
 import Skills from '@/components/Skills'
-import Projects from '@/components/Projects'
 import Cards3D from '@/components/Cards3D'
 import Contact from '@/components/Contact'
 
@@ -18,7 +17,6 @@ export default function Home() {
       <VideoExpand />
       <Skills />
       <Cards3D />
-      <Projects />
       <Contact />
     </main>
   )

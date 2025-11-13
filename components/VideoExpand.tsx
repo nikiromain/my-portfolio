@@ -15,15 +15,22 @@ const VideoExpand = () => {
       
       // Calculate progress based on when section is in viewport
       if (rect.top < windowHeight && rect.bottom > 0) {
+        // Start animation when section enters viewport
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
         const sectionTop = sectionRef.current.offsetTop
         const sectionHeight = sectionRef.current.offsetHeight
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
         
-        // Calculate progress based on how much of the section has been scrolled
-        const distance = scrollTop - sectionTop + windowHeight
-        const totalDistance = sectionHeight + windowHeight
-        const progress = Math.max(0, Math.min(1, distance / totalDistance))
+        // Calculate progress: 0 when section top enters viewport, 1 when scrolled through
+        const scrolled = scrollTop + windowHeight - sectionTop
+        const totalScroll = sectionHeight
+        const progress = Math.max(0, Math.min(1, scrolled / totalScroll))
         setScrollProgress(progress)
+      } else if (rect.top > windowHeight) {
+        // Section hasn't entered viewport yet
+        setScrollProgress(0)
+      } else if (rect.bottom < 0) {
+        // Section has been fully scrolled past
+        setScrollProgress(1)
       }
     }
 
@@ -45,7 +52,7 @@ const VideoExpand = () => {
             muted
             playsInline
           >
-            <source src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4" type="video/mp4" />
+            <source src="/creativity_unlocked.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="text-right">Unlocked</div>
@@ -55,8 +62,8 @@ const VideoExpand = () => {
         .video-expand-section {
           position: relative;
           width: 100%;
-          padding: 6rem 0;
-          min-height: 150vh;
+          padding: 4rem 0;
+          min-height: 100vh;
           overflow: hidden;
           background: #000000;
           display: flex;
@@ -112,11 +119,11 @@ const VideoExpand = () => {
 
         .video-container {
           position: relative;
-          width: ${400 + scrollProgress * 1400}px;
-          max-width: 98%;
+          width: ${300 + scrollProgress * 1200}px;
+          max-width: 95vw;
           margin: 0 auto;
           transition: border-radius 0.3s ease;
-          border-radius: 20px;
+          border-radius: ${20 - scrollProgress * 15}px;
           overflow: hidden;
           z-index: 1;
         }
@@ -126,6 +133,56 @@ const VideoExpand = () => {
           aspect-ratio: 16/9;
           object-fit: cover;
           filter: grayscale(${100 - scrollProgress * 100}%) brightness(${0.5 + scrollProgress * 0.5});
+        }
+
+        @media (max-width: 768px) {
+          .video-expand-section {
+            padding: 2rem 0;
+            min-height: 80vh;
+          }
+
+          .video-wrapper {
+            gap: 1rem;
+            padding: 0 1rem;
+            flex-wrap: wrap;
+          }
+
+          .text-left,
+          .text-right {
+            font-size: 2rem;
+          }
+
+          .text-center {
+            font-size: 2rem;
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+            margin-top: 1rem;
+          }
+
+          .video-container {
+            width: ${200 + scrollProgress * 600}px !important;
+            max-width: 90vw;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .text-left,
+          .text-right,
+          .text-center {
+            font-size: 1.5rem;
+          }
+
+          .video-container {
+            width: ${150 + scrollProgress * 500}px !important;
+          }
+        }
+
+        :global(:root.light) .text-left,
+        :global(:root.light) .text-right,
+        :global(:root.light) .text-center {
+          color: rgba(10, 10, 10, 0.9);
         }
       `}</style>
     </section>
