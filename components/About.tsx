@@ -28,7 +28,7 @@ const About = () => {
               </div>
               <h3 className="subsection-title">Meet Nikisha</h3>
               <p className="about-text">
-                I'm Nikisha Romain, a Digital Strategist, Web Designer, and Developer with over six years of experience helping businesses build their online presence. I've worked with more than 200 clients across the Caribbean, creating impactful websites across various industries. As a Team Lead skilled in change management, I focus on delivering innovative, results-driven digital solutions that help brands grow and stand out online.
+                I&apos;m Nikisha Romain, a Digital Strategist, Web Designer, and Developer with over six years of experience helping businesses build their online presence. I&apos;ve worked with more than 200 clients across the Caribbean, creating impactful websites across various industries. As a Team Lead skilled in change management, I focus on delivering innovative, results-driven digital solutions that help brands grow and stand out online.
               </p>
               <hr className="title-divider" />
               <div className="skills-list">
